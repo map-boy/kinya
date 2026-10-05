@@ -1,0 +1,15 @@
+# EXAMPLES ONLY - replace/extend with the real departments and issues. Grows without code changes.
+urgency: [low, medium, high, critical]
+departments:
+  WASAC:
+    description: water supply problems
+    issues: [water_outage, pipe_burst, billing_dispute, new_connection]
+  REG:
+    description: electricity supply problems
+    issues: [power_outage, transformer_fault, billing_dispute, new_connection]
+  POLICE:
+    description: security and emergencies
+    issues: [theft, accident, domestic_violence, missing_person]
+  HEALTH:
+    description: health services and ambulance
+    issues: [ambulance_request, medicine_availability, clinic_complaint]

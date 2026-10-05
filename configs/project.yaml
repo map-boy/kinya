@@ -1,0 +1,72 @@
+paths: {data: data, models: models, reports: reports}
+pipeline: [pull, collect, clean, corpus, synth, sft, push, train, eval, push]   # order of all stages
+default:  [collect, clean, corpus, synth, sft]                # run by "python -m kinya run"
+split: {val_ratio: 0.02}
+
+clean:
+  filters:                       # add/remove/reorder freely; names come from kinya/stages/clean.py
+    - {name: length, min_chars: 40, max_chars: 20000}
+    - {name: alpha_ratio, min: 0.6}
+    - {name: stopwords, file: configs/lang/stopwords.txt, min_ratio: 0.05}   # skipped until you add the file
+
+synth:
+  prompt_file: configs/prompts/synth.txt
+  per_issue: 5                   # raise later; only the new ones get generated
+  sleep: 0.5
+  variants:                      # scenario styles, cycled per dialogue
+    - "the caller is calm and gives clear details"
+    - "the caller is upset and in a hurry"
+    - "the caller is confused and gives details slowly"
+    - "the caller is an elderly person who needs simple wording"
+  provider:
+    type: openai_compat
+    base_url: https://api.mistral.ai/v1
+    model: mistral-large-latest
+    api_key_env: MISTRAL_API_KEY
+    temperature: 0.9
+
+sft:
+  system_prompt_file: configs/prompts/system.txt
+  reply_template: "<reply>{text}</reply>"
+  require_reviewed: false        # true = train only on speaker-reviewed dialogues
+  route_template: '<route dept="{dept}" urgency="{urgency}" sector="{sector}" issue="{issue}"/>'
+
+train:
+  mode: sft                      # cpt = continued pretraining on raw text, sft = call-agent tuning
+  base_model: unsloth/mistral-7b-v0.3-bnb-4bit
+  run_name: wandaa-brain-v1
+  max_seq: 2048
+  load_in_4bit: true
+  lora_r: 64
+  lora_alpha: 64
+  target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+  batch_size: 2
+  grad_accum: 8
+  lr: 0.0002
+  epochs: 1
+  save_steps: 200
+  logging_steps: 10
+  hub_repo: ""                   # e.g. umwe/wandaa-brain-v1 to push adapter
+
+eval:
+  adapter: models/wandaa-brain-v1
+  max_seq: 2048
+  max_new: 256
+  limit: 300
+  gold_file: data/eval/gold.jsonl          # speaker-reviewed held-out set (made by the review stage)
+  fallback_file: data/sft/sft_val.jsonl    # used until a gold set exists
+  gates:                                   # all must pass, else report says passed: false
+    format_ok: 0.95
+    dept_acc: 0.85
+    issue_acc: 0.75
+    urgency_acc: 0.70
+    reply_len_ok: 0.95
+    min_slice_acc: 0.50                    # every dept/issue/urgency slice must reach this
+hub:
+  dataset_repo: wandaa-data      # no "/" -> your HF username is prefixed automatically
+  model_repo: wandaa-brain
+  private: true
+  pull_models: true
+  sync_dirs: [raw, clean, synth, sft, corpus, review, eval]
+
+review: {queue_size: 50}

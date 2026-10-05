@@ -1,0 +1,26 @@
+# Add a source = add an entry. No code change. types: local | http | hf
+sources:
+  - name: inbox
+    type: local
+    path: data/inbox             # drop .txt/.md/.jsonl files here, then run
+    glob: "**/*"
+    split: paragraph             # file | paragraph | line   (for .txt/.md)
+    text_field: text             # for .jsonl
+    enabled: true
+
+  - name: wikipedia_rw           # verify the dataset/config name on huggingface.co
+    type: hf
+    path: wikimedia/wikipedia
+    config: 20231101.rw
+    split: train
+    text_fields: [text]
+    streaming: true
+    limit: 0                     # 0 = no limit
+    enabled: true
+
+  - name: web_pages
+    type: http
+    urls: []                     # or urls_file: configs/urls.txt (one URL per line)
+    chunk_chars: 1500
+    delay: 1.0
+    enabled: false               # only scrape sites whose terms allow it

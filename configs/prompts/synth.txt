@@ -1,0 +1,10 @@
+Write a realistic phone conversation in Kinyarwanda between a CALLER and a polite call-centre AGENT.
+Department: $dept ($dept_description)
+Issue: $issue
+Situation: $variant
+Urgency must be one of: $urgency_levels
+The agent greets politely, asks for the location (sector) and key details, and ends by confirming the case will be sent to the department.
+Return ONLY valid JSON, no extra text:
+{"turns":[{"role":"caller","text":"..."},{"role":"agent","text":"..."}],
+ "route":{"dept":"$dept","urgency":"<one level>","sector":"<sector named by caller>","issue":"$issue"}}
+The last turn must be from the agent. Use between 4 and 8 turns.

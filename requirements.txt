@@ -1,0 +1,8 @@
+pyyaml
+requests
+datasets
+huggingface_hub
+pytest
+# GPU machine only (Colab/Kaggle) for train + eval:
+# unsloth
+# trl
