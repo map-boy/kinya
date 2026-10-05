@@ -1,10 +1,14 @@
-import os, time
+import time
 from .registry import provider
+from .secrets import get_secret
 
 @provider("openai_compat")
 def openai_compat(cfg):
     import requests
-    key = os.environ[cfg["api_key_env"]]
+    key_name = cfg.get("api_key_secret") or cfg.get("api_key_env")
+    key = get_secret(key_name) if key_name else None
+    if not key:
+        raise RuntimeError(f"missing secret '{key_name}' in env/Colab/Kaggle vault")
     url = cfg["base_url"].rstrip("/") + "/chat/completions"
     def call(prompt):
         for attempt in range(cfg.get("retries", 4)):
