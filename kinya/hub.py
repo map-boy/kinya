@@ -1,19 +1,7 @@
-import os
+from .secrets import first_secret
 
 def token():
-    for k in ("HF_TOKEN", "HUGGINGFACE_HUB_TOKEN"):
-        if os.environ.get(k):
-            return os.environ[k]
-    try:
-        from google.colab import userdata
-        return userdata.get("HF_TOKEN")
-    except Exception:
-        pass
-    try:
-        from kaggle_secrets import UserSecretsClient
-        return UserSecretsClient().get_secret("HF_TOKEN")
-    except Exception:
-        return None
+    return first_secret(("HF_TOKEN", "HUGGINGFACE_HUB_TOKEN"))
 
 def api():
     from huggingface_hub import HfApi

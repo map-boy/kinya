@@ -20,7 +20,10 @@ def _parse(txt, tax, dept, issue):
 @stage("synth")
 def run(proj):
     c = proj.stage_cfg("synth"); tax = proj.taxonomy
-    call = PROVIDERS[c["provider"]["type"]](c["provider"])
+    try:
+        call = PROVIDERS[c["provider"]["type"]](c["provider"])
+    except Exception as e:
+        return {"skipped": f"synth unavailable: {e}"}
     tpl = Template(proj.resolve(c["prompt_file"]).read_text(encoding="utf-8-sig"))
     store = Store(proj.path("data") / "synth", "dialogues")
     variants, added, failed = c["variants"], 0, 0
