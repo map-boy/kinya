@@ -1,4 +1,4 @@
-import time
+import sys, time
 from .registry import provider
 from .secrets import get_secret
 
@@ -11,14 +11,21 @@ def openai_compat(cfg):
         raise RuntimeError(f"missing secret '{key_name}' in env/Colab/Kaggle vault")
     url = cfg["base_url"].rstrip("/") + "/chat/completions"
     def call(prompt):
+        last = ""
         for attempt in range(cfg.get("retries", 4)):
             try:
                 r = requests.post(url, headers={"Authorization": "Bearer " + key}, timeout=120, json={
                     "model": cfg["model"], "temperature": cfg.get("temperature", 0.9),
                     "messages": [{"role": "user", "content": prompt}]})
-                r.raise_for_status()
+                if r.status_code != 200:
+                    last = f"HTTP {r.status_code}: {r.text[:160]}"
+                    print(f"[provider {cfg['model']}] {last}", file=sys.stderr, flush=True)
+                    time.sleep(2 ** attempt)
+                    continue
                 return r.json()["choices"][0]["message"]["content"]
-            except Exception:
+            except Exception as e:
+                last = f"{type(e).__name__}: {str(e)[:160]}"
+                print(f"[provider {cfg['model']}] {last}", file=sys.stderr, flush=True)
                 time.sleep(2 ** attempt)
         return None
     return call

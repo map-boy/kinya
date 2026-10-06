@@ -1,5 +1,7 @@
 from ..registry import stage
 
+CHAT_TEMPLATE = r"""{% for m in messages %}{% if m['role'] == 'system' %}{{ m['content'] + '\n\n' }}{% elif m['role'] == 'user' %}{{ '[INST] ' + m['content'] + ' [/INST]' }}{% else %}{{ ' ' + m['content'] + eos_token }}{% endif %}{% endfor %}"""
+
 @stage("train")
 def run(proj):
     """GPU machine only. Needs: pip install unsloth trl datasets"""
@@ -13,6 +15,8 @@ def run(proj):
              {"train": str(data / "sft/sft_train.jsonl"), "validation": str(data / "sft/sft_val.jsonl")})
     ds = load_dataset("json", data_files=files)
     model, tok = FastLanguageModel.from_pretrained(c["base_model"], max_seq_length=c["max_seq"], load_in_4bit=c.get("load_in_4bit", True))
+    if not getattr(tok, "chat_template", None):
+        tok.chat_template = CHAT_TEMPLATE
     model = FastLanguageModel.get_peft_model(model, r=c["lora_r"], lora_alpha=c["lora_alpha"], target_modules=c["target_modules"],
                                              lora_dropout=0, bias="none", use_gradient_checkpointing="unsloth")
     out = proj.path("models") / c["run_name"]
