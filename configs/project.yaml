@@ -1,7 +1,7 @@
 paths: {data: data, models: models, reports: reports}
 pipeline: [pull, collect, clean, corpus, synth, sft, push, train, eval, push]   # order of all stages
 default:  [collect, clean, corpus, synth, sft]                # run by "python -m kinya run"
-split: {val_ratio: 0.02}
+split: {val_ratio: 0.1}
 
 clean:
   filters:                       # add/remove/reorder freely; names come from kinya/stages/clean.py
@@ -11,7 +11,7 @@ clean:
 
 synth:
   prompt_file: configs/prompts/synth.txt
-  per_issue: 5                   # raise later; only the new ones get generated
+  per_issue: 12                  # raise later; only the new ones get generated
   sleep: 0.5
   variants:                      # scenario styles, cycled per dialogue
     - "the caller is calm and gives clear details"
@@ -21,7 +21,7 @@ synth:
   provider:
     type: openai_compat
     base_url: https://api.mistral.ai/v1
-    model: mistral-large-latest
+    model: mistral-small-latest
     api_key_env: MISTRAL_API_KEY
     temperature: 0.9
 
@@ -43,7 +43,7 @@ train:
   batch_size: 2
   grad_accum: 8
   lr: 0.0002
-  epochs: 1
+  epochs: 3
   save_steps: 200
   logging_steps: 10
   hub_repo: ""                   # e.g. umwe/wandaa-brain-v1 to push adapter
