@@ -12,7 +12,7 @@ clean:
 synth:
   prompt_file: configs/prompts/synth.txt
   per_issue: 12                  # raise later; only the new ones get generated
-  sleep: 0.5
+  sleep: 2
   variants:                      # scenario styles, cycled per dialogue
     - "the caller is calm and gives clear details"
     - "the caller is upset and in a hurry"
@@ -24,6 +24,7 @@ synth:
     model: mistral-small-latest
     api_key_env: MISTRAL_API_KEY
     temperature: 0.9
+    retries: 8
 
 sft:
   system_prompt_file: configs/prompts/system.txt

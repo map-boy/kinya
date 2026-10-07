@@ -13,19 +13,21 @@ def openai_compat(cfg):
     def call(prompt):
         last = ""
         for attempt in range(cfg.get("retries", 4)):
+            wait = 2 ** attempt
             try:
                 r = requests.post(url, headers={"Authorization": "Bearer " + key}, timeout=120, json={
                     "model": cfg["model"], "temperature": cfg.get("temperature", 0.9),
                     "messages": [{"role": "user", "content": prompt}]})
-                if r.status_code != 200:
-                    last = f"HTTP {r.status_code}: {r.text[:160]}"
-                    print(f"[provider {cfg['model']}] {last}", file=sys.stderr, flush=True)
-                    time.sleep(2 ** attempt)
-                    continue
-                return r.json()["choices"][0]["message"]["content"]
+                if r.status_code == 200:
+                    return r.json()["choices"][0]["message"]["content"]
+                last = f"HTTP {r.status_code}: {r.text[:160]}"
+                if r.status_code == 429:
+                    try: wait = float(r.headers.get("Retry-After", ""))
+                    except ValueError: wait = min(60, 8 * (attempt + 1))
+                    wait = max(wait, 5)
             except Exception as e:
                 last = f"{type(e).__name__}: {str(e)[:160]}"
-                print(f"[provider {cfg['model']}] {last}", file=sys.stderr, flush=True)
-                time.sleep(2 ** attempt)
+            print(f"[provider {cfg['model']}] {last} (retry in {wait:.0f}s)", file=sys.stderr, flush=True)
+            time.sleep(wait)
         return None
     return call
