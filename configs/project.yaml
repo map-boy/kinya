@@ -62,6 +62,7 @@ eval:
     issue_acc: 0.75
     urgency_acc: 0.70
     reply_len_ok: 0.95
+    min_n: 100                             # fewer test rows than this = verdict INCONCLUSIVE
     min_slice_acc: 0.50                    # every dept/issue/urgency slice must reach this
 hub:
   dataset_repo: wandaa-data      # no "/" -> your HF username is prefixed automatically

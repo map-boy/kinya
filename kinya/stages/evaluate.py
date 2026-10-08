@@ -19,12 +19,12 @@ def run(proj):
         out = brain.raw(r["prompt"])
         scored.append({"gold": g, "pred": metrics.parse_route(out), "reply": metrics.parse_reply(out), "raw": out, "last_user": r["prompt"][-1]["content"]})
         if len(scored) >= c.get("limit", 300): break
-    rep = metrics.score(scored, c.get("gates"))
     mx = proj.policy.get("limits", {}).get("max_reply_chars", 10**9)
-    rep["reply_len_ok"] = sum(len(s["reply"]) <= mx for s in scored) / max(len(scored), 1)
+    rep = metrics.score(scored, c.get("gates"), mx)
     rep["red_team"] = brain.red_team()
     if rep["red_team"]["failed"]:
         rep["passed"] = False; rep["gate_failures"].append("red_team failures")
+        if rep["verdict"] == "PASS": rep["verdict"] = "FAIL"
     rep["eval_source"] = src.name
     latest = rdir / "latest.json"
     prev = json.loads(latest.read_text(encoding="utf-8")) if latest.exists() else None
@@ -34,4 +34,4 @@ def run(proj):
     (rdir / f"eval_{ts}.md").write_text(metrics.to_md(rep, prev), encoding="utf-8")
     with open(rdir / f"preds_{ts}.jsonl", "w", encoding="utf-8") as f:
         for s in scored: f.write(json.dumps(s, ensure_ascii=False) + "\n")
-    return {k: rep[k] for k in ("eval_source", "n", "format_ok", "dept_acc", "issue_acc", "urgency_acc", "full_match", "passed", "gate_failures", "weak_slices")}
+    return {k: rep[k] for k in ("eval_source", "n", "format_ok", "dept_acc", "issue_acc", "urgency_acc", "full_match", "reply_len_ok", "verdict", "passed", "gate_failures", "weak_slices")}
