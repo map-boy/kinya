@@ -1,0 +1,359 @@
+10:41:24 $ git clone https://github.com/map-boy/kinya.git
+Cloning into 'kinya'...
+10:41:25 -> exit 0
+10:41:25 $ git pull --ff-only
+Already up to date.
+10:41:25 -> exit 0
+10:41:25 $ /usr/bin/python3 -m pip install -q -r requirements.txt
+10:41:30 -> exit 0
+10:41:30 $ /usr/bin/python3 -m pip install -q 'datasets>=3.4.1,<4.4.0' pyyaml huggingface_hub
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 506.8/506.8 kB 8.6 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 119.7/119.7 kB 5.8 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 199.3/199.3 kB 10.6 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 146.7/146.7 kB 7.9 MB/s eta 0:00:00
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+bigframes 2.48.0 requires google-cloud-bigquery-storage<3.0.0,>=2.30.0, which is not installed.
+pathos 0.3.5 requires dill>=0.4.1, but you have dill 0.4.0 which is incompatible.
+pathos 0.3.5 requires multiprocess>=0.70.19, but you have multiprocess 0.70.16 which is incompatible.
+s3fs 2025.12.0 requires fsspec==2025.12.0, but you have fsspec 2025.9.0 which is incompatible.
+gcsfs 2025.12.0 requires fsspec==2025.12.0, but you have fsspec 2025.9.0 which is incompatible.
+10:41:37 -> exit 0
+10:41:37 $ /usr/bin/python3 -c 'import unsloth'
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import unsloth
+ModuleNotFoundError: No module named 'unsloth'
+10:41:37 -> exit 1
+10:41:37 $ /usr/bin/python3 -m pip install -q unsloth
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 81.3/81.3 kB 2.3 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 26.1/26.1 MB 18.7 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 43.1/43.1 MB 20.7 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 73.8/73.8 kB 3.7 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.2/10.2 MB 29.3 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 423.1/423.1 kB 13.8 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 25.3 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.3/3.3 MB 28.7 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.6/3.6 MB 29.7 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 216.9/216.9 kB 8.6 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.3/3.3 MB 29.6 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.4/3.4 MB 30.1 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 230.5/230.5 kB 11.0 MB/s eta 0:00:00
+10:42:09 -> exit 0
+10:42:09 $ /usr/bin/python3 -m pip install -q 'datasets>=3.4.1,<4.4.0'
+10:42:12 -> exit 0
+10:42:12 $ /usr/bin/python3 -m kinya run pull
+== pull
+
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]
+Fetching 5 files:  20%|██        | 1/5 [00:00<00:00,  5.40it/s]
+Fetching 5 files:  40%|████      | 2/5 [00:00<00:00,  4.62it/s]
+Fetching 5 files:  60%|██████    | 3/5 [00:00<00:00,  5.17it/s]
+Fetching 5 files:  80%|████████  | 4/5 [00:00<00:00,  3.92it/s]
+Fetching 5 files: 100%|██████████| 5/5 [00:00<00:00,  5.23it/s]
+Returning existing local_dir `/kaggle/working/kinya` as remote repo cannot be accessed in `snapshot_download` (404 Client Error. (Request ID: Root=1-6ac4d087-649114e65db4076b0fe91eef;aad7e94d-3474-4156-bb6f-a777338ab1c1)
+
+Repository Not Found for url: https://huggingface.co/api/models/map-boy/wandaa-brain/revision/main.
+Please make sure you specified the correct `repo_id` and `repo_type`.
+If you are trying to access a private or gated repo, make sure you are authenticated and your token has the required permissions.
+For more details, see https://huggingface.co/docs/huggingface_hub/authentication).
+{
+  "dataset": "pulled map-boy/wandaa-data",
+  "model": "pulled map-boy/wandaa-brain"
+}
+10:42:15 -> exit 0
+10:42:15 $ /usr/bin/python3 -m kinya run synth
+== synth
+{
+  "added": 0,
+  "failed": 39,
+  "total": 36
+}
+10:52:37 -> exit 0
+10:52:37 $ /usr/bin/python3 -m kinya run push
+== push
+No files have been modified since last commit. Skipping to prevent empty commit.
+{
+  "dataset": "map-boy/wandaa-data",
+  "reports": "map-boy/wandaa-brain"
+}
+10:52:40 -> exit 0
+10:52:40 $ /usr/bin/python3 -m kinya run sft
+== sft
+{
+  "train": 121,
+  "val": 3
+}
+10:52:40 -> exit 0
+10:52:40 $ /usr/bin/python3 -m kinya run push
+== push
+{
+  "dataset": "map-boy/wandaa-data",
+  "reports": "map-boy/wandaa-brain"
+}
+10:52:43 -> exit 0
+10:52:43 $ /usr/bin/python3 -m kinya run train
+== train
+🦥 Unsloth: Will patch your computer to enable 2x faster free finetuning.
+🦥 Unsloth Zoo will now patch everything to make training faster!
+
+Generating train split: 0 examples [00:00, ? examples/s]
+Generating train split: 121 examples [00:00, 2580.74 examples/s]
+
+Generating validation split: 0 examples [00:00, ? examples/s]
+Generating validation split: 3 examples [00:00, 1816.50 examples/s]
+==((====))==  Unsloth 2026.9.14: Fast Mistral patching. Transformers: 5.5.0.
+   \\   /|    Tesla T4. Num GPUs = 1. Max memory: 14.562 GB. Platform: Linux.
+O^O/ \_/ \    Torch: 2.11.0+cu128. CUDA: 7.5. CUDA Toolkit: 12.8. Triton: 3.6.0
+\        /    Bfloat16 = FALSE. FA [Xformers = 0.0.35. FA2 = False]
+ "-____-"     Free license: http://github.com/unslothai/unsloth
+Unsloth: Fast downloading is enabled - ignore downloading bars which are red colored!
+/usr/local/lib/python3.13/dist-packages/huggingface_hub/constants.py:299: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as 'hf_transfer' is not used anymore. Please use `HF_XET_HIGH_PERFORMANCE` instead to enable high performance transfer with Xet. Visit https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables#hfxethighperformance for more details.
+  warnings.warn(
+/usr/local/lib/python3.13/dist-packages/huggingface_hub/constants.py:299: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as 'hf_transfer' is not used anymore. Please use `HF_XET_HIGH_PERFORMANCE` instead to enable high performance transfer with Xet. Visit https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables#hfxethighperformance for more details.
+  warnings.warn(
+
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]
+Loading weights:   5%|▍         | 14/291 [00:00<00:01, 138.65it/s]
+Loading weights:  15%|█▌        | 44/291 [00:00<00:01, 229.43it/s]
+Loading weights:  23%|██▎       | 67/291 [00:00<00:00, 226.54it/s]
+Loading weights:  31%|███▏      | 91/291 [00:00<00:00, 230.96it/s]
+Loading weights:  40%|███▉      | 115/291 [00:00<00:00, 226.84it/s]
+Loading weights:  48%|████▊     | 139/291 [00:00<00:00, 218.22it/s]
+Loading weights:  56%|█████▋    | 164/291 [00:00<00:00, 225.31it/s]
+Loading weights:  64%|██████▍   | 187/291 [00:00<00:00, 223.09it/s]
+Loading weights:  73%|███████▎  | 211/291 [00:00<00:00, 223.06it/s]
+Loading weights:  81%|████████  | 235/291 [00:01<00:00, 225.23it/s]
+Loading weights:  89%|████████▊ | 258/291 [00:01<00:00, 218.48it/s]
+Loading weights:  97%|█████████▋| 281/291 [00:01<00:00, 221.72it/s]
+Loading weights: 100%|██████████| 291/291 [00:01<00:00, 223.78it/s]
+Unsloth 2026.9.14 patched 32 layers with 32 QKV layers, 32 O layers and 32 MLP layers.
+
+Unsloth: Tokenizing ["prompt"+"completion"] (num_proc=2):   0%|          | 0/121 [00:00<?, ? examples/s]
+Unsloth: Tokenizing ["prompt"+"completion"] (num_proc=2):   0%|          | 0/121 [00:00<?, ? examples/s]
+Unsloth: Tokenizing ["prompt"+"completion"] (num_proc=2):   0%|          | 0/121 [00:00<?, ? examples/s]
+multiprocess.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/dist-packages/multiprocess/pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+                    ~~~~^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/datasets/utils/py_utils.py", line 586, in _write_generator_to_queue
+    for i, result in enumerate(func(**kwargs)):
+                     ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/datasets/arrow_dataset.py", line 3664, in _map_single
+    for i, example in iter_outputs(shard_iterable):
+                      ~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/datasets/arrow_dataset.py", line 3638, in iter_outputs
+    yield i, apply_function(example, i, offset=offset)
+             ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/datasets/arrow_dataset.py", line 3561, in apply_function
+    processed_inputs = function(*fn_args, *additional_args, **fn_kwargs)
+  File "/kaggle/working/kinya/unsloth_compiled_cache/UnslothSFTTrainer.py", line 1420, in _tokenize_pc
+    prompt_ids = processing_class.apply_chat_template(
+        example["prompt"], tokenize=True,
+    ...<2 lines>...
+        **(example.get("chat_template_kwargs") or {}),
+    )
+  File "/usr/local/lib/python3.13/dist-packages/unsloth_zoo/temporary_patches/misc.py", line 2278, in _patched_apply_chat_template
+    return _original_apply(self, conversation, *args, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/transformers/tokenization_utils_base.py", line 3043, in apply_chat_template
+    chat_template = self.get_chat_template(chat_template, tools)
+  File "/usr/local/lib/python3.13/dist-packages/transformers/tokenization_utils_base.py", line 3225, in get_chat_template
+    raise ValueError(
+    ...<4 lines>...
+    )
+ValueError: Cannot use chat template functions because tokenizer.chat_template is not set and no template argument was passed! For information about writing templates and setting the tokenizer.chat_template attribute, please see the documentation at https://huggingface.co/docs/transformers/main/en/chat_templating
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/kaggle/working/kinya/kinya/__main__.py", line 2, in <module>
+    main()
+    ~~~~^^
+  File "/kaggle/working/kinya/kinya/cli.py", line 33, in main
+    print(json.dumps(STAGES[n](proj), ensure_ascii=False, indent=2))
+                     ~~~~~~~~~^^^^^^
+  File "/kaggle/working/kinya/kinya/stages/train.py", line 23, in run
+    tr = SFTTrainer(model=model, tokenizer=tok, train_dataset=ds["train"], eval_dataset=ds["validation"], args=args)
+  File "/usr/local/lib/python3.13/dist-packages/unsloth/trainer.py", line 1315, in new_init
+    original_init(self, *args, **kwargs)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/unsloth/trainer.py", line 1475, in new_init
+    original_init(self, *args, **kwargs)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/working/kinya/unsloth_compiled_cache/UnslothSFTTrainer.py", line 1888, in __init__
+    super().__init__(
+    ~~~~~~~~~~~~~~~~^
+        model = model,
+        ^^^^^^^^^^^^^^
+    ...<10 lines>...
+        peft_config = peft_config,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        formatting_func = formatting_func,**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/working/kinya/unsloth_compiled_cache/UnslothSFTTrainer.py", line 1175, in __init__
+    train_dataset = self._prepare_dataset(
+        train_dataset, processing_class, args, args.packing, formatting_func, "train"
+    )
+  File "/kaggle/working/kinya/unsloth_compiled_cache/UnslothSFTTrainer.py", line 1466, in _prepare_dataset
+    dataset = dataset.map(
+        _tokenize_pc, batched=False,
+        remove_columns=list(column_names), **map_kwargs,
+    )
+  File "/usr/local/lib/python3.13/dist-packages/unsloth_zoo/temporary_patches/misc.py", line 1534, in map
+    return original_map(self, *args, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/datasets/arrow_dataset.py", line 562, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+                                           ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/datasets/arrow_dataset.py", line 3323, in map
+    for rank, done, content in iflatmap_unordered(
+                               ~~~~~~~~~~~~~~~~~~^
+        pool, Dataset._map_single, kwargs_iterable=unprocessed_kwargs_per_job
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/dist-packages/datasets/utils/py_utils.py", line 626, in iflatmap_unordered
+    [async_result.get(timeout=0.05) for async_result in async_results]
+     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/multiprocess/pool.py", line 774, in get
+    raise self._value
+ValueError: Cannot use chat template functions because tokenizer.chat_template is not set and no template argument was passed! For information about writing templates and setting the tokenizer.chat_template attribute, please see the documentation at https://huggingface.co/docs/transformers/main/en/chat_templating
+10:54:18 -> exit 1
+10:54:18 $ /usr/bin/python3 -m kinya run push
+== push
+No files have been modified since last commit. Skipping to prevent empty commit.
+{
+  "dataset": "map-boy/wandaa-data",
+  "reports": "map-boy/wandaa-brain"
+}
+10:54:20 -> exit 0
+10:54:20 $ /usr/bin/python3 -m kinya run eval
+== eval
+🦥 Unsloth: Will patch your computer to enable 2x faster free finetuning.
+🦥 Unsloth Zoo will now patch everything to make training faster!
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'https://huggingface.co/models/wandaa-brain-v1/resolve/main/config.json'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/dist-packages/transformers/utils/hub.py", line 422, in cached_files
+    hf_hub_download(
+    ~~~~~~~~~~~~~~~^
+        path_or_repo_id,
+        ^^^^^^^^^^^^^^^^
+    ...<10 lines>...
+        tqdm_class=tqdm_class,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/dist-packages/huggingface_hub/utils/_validators.py", line 88, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/huggingface_hub/file_download.py", line 1027, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+        # Destination
+    ...<15 lines>...
+        dry_run=dry_run,
+    )
+  File "/usr/local/lib/python3.13/dist-packages/huggingface_hub/file_download.py", line 1174, in _hf_hub_download_to_cache_dir
+    _raise_on_head_call_error(head_call_error, force_download, local_files_only)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/huggingface_hub/file_download.py", line 1913, in _raise_on_head_call_error
+    raise head_call_error
+huggingface_hub.errors.RepositoryNotFoundError: 404 Client Error. (Request ID: Root=1-6ac4d36d-5a9102a27cfef5862ef4f27e;afd76ffc-a208-450b-a831-40d86a0141a6)
+
+Repository Not Found for url: https://huggingface.co/models/wandaa-brain-v1/resolve/main/config.json.
+Please make sure you specified the correct `repo_id` and `repo_type`.
+If you are trying to access a private or gated repo, make sure you are authenticated and your token has the required permissions.
+For more details, see https://huggingface.co/docs/huggingface_hub/authentication
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/dist-packages/unsloth/models/loader.py", line 1126, in from_pretrained
+    model_config = AutoConfig.from_pretrained(
+        model_name,
+    ...<3 lines>...
+        local_files_only = local_files_only,
+    )
+  File "/usr/local/lib/python3.13/dist-packages/unsloth/import_fixes.py", line 11427, in from_pretrained
+    return original(cls, pretrained_model_name_or_path, *args, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/unsloth/import_fixes.py", line 3773, in from_pretrained
+    result = original_func(cls, pretrained_model_name_or_path, *args, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/transformers/models/auto/configuration_auto.py", line 1483, in from_pretrained
+    config_dict, unused_kwargs = PreTrainedConfig.get_config_dict(pretrained_model_name_or_path, **kwargs)
+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/transformers/configuration_utils.py", line 667, in get_config_dict
+    config_dict, kwargs = cls._get_config_dict(pretrained_model_name_or_path, **kwargs)
+                          ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/transformers/configuration_utils.py", line 722, in _get_config_dict
+    resolved_config_file = cached_file(
+        pretrained_model_name_or_path,
+    ...<9 lines>...
+        _commit_hash=commit_hash,
+    )
+  File "/usr/local/lib/python3.13/dist-packages/transformers/utils/hub.py", line 278, in cached_file
+    file = cached_files(path_or_repo_id=path_or_repo_id, filenames=[filename], **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/transformers/utils/hub.py", line 454, in cached_files
+    raise OSError(
+    ...<4 lines>...
+    ) from e
+OSError: models/wandaa-brain-v1 is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `hf auth login` or by passing `token=<your_token>`
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/kaggle/working/kinya/kinya/__main__.py", line 2, in <module>
+    main()
+    ~~~~^^
+  File "/kaggle/working/kinya/kinya/cli.py", line 33, in main
+    print(json.dumps(STAGES[n](proj), ensure_ascii=False, indent=2))
+                     ~~~~~~~~~^^^^^^
+  File "/kaggle/working/kinya/kinya/stages/evaluate.py", line 15, in run
+    brain, scored = Brain(proj), []
+                    ~~~~~^^^^^^
+  File "/kaggle/working/kinya/kinya/serve.py", line 11, in __init__
+    self.model, self.tok = FastLanguageModel.from_pretrained(
+                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        str(p) if p.exists() else a, max_seq_length=c.get("max_seq", 2048), load_in_4bit=True)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/unsloth/models/loader_utils.py", line 3543, in _wrapper
+    return fn(*args, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/unsloth/models/mistral_format.py", line 696, in _wrapper
+    return fn(*args, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/unsloth/models/fp8_to_nf4.py", line 106, in _wrapper
+    return fn(*args, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/unsloth/models/loader.py", line 1219, in from_pretrained
+    raise RuntimeError(combined_error) from _cause
+RuntimeError: Unsloth: Failed to load model. Both AutoConfig and PeftConfig loading failed.
+
+AutoConfig error: models/wandaa-brain-v1 is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `hf auth login` or by passing `token=<your_token>`
+
+PeftConfig error: Can't find 'adapter_config.json' at 'models/wandaa-brain-v1'
+
+
+10:54:39 -> exit 1
+10:54:39 $ /usr/bin/python3 -m kinya run push
+== push
+No files have been modified since last commit. Skipping to prevent empty commit.
+{
+  "dataset": "map-boy/wandaa-data",
+  "reports": "map-boy/wandaa-brain"
+}
+10:54:41 -> exit 0
+10:54:41 SUMMARY {'pull': 0, 'synth': 0, 'sft': 0, 'train': 1, 'eval': 1}
+10:54:41 $ /usr/bin/python3 -m kinya run push
+== push
+No files have been modified since last commit. Skipping to prevent empty commit.
+{
+  "dataset": "map-boy/wandaa-data",
+  "reports": "map-boy/wandaa-brain"
+}
+10:54:43 -> exit 0

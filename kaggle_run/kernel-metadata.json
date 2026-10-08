@@ -1,0 +1,19 @@
+{
+    "competition_sources":  [
+
+                            ],
+    "id":  "mugishaalainpaisible/kinya-autorun",
+    "enable_gpu":  true,
+    "kernel_type":  "script",
+    "kernel_sources":  [
+
+                       ],
+    "dataset_sources":  [
+
+                        ],
+    "is_private":  true,
+    "enable_internet":  true,
+    "language":  "python",
+    "title":  "kinya-autorun",
+    "code_file":  "run_kinya.py"
+}

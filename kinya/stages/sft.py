@@ -1,6 +1,8 @@
 import json
 from ..registry import stage
 from ..store import Store, is_val
+from .. import validity
+from collections import Counter
 
 def _build(dlg, c, system):
     turns, msgs, out = dlg["turns"], [{"role": "system", "content": system}], []
@@ -23,11 +25,17 @@ def run(proj):
     ratio = proj.p["split"]["val_ratio"]
     d = data / "sft"; d.mkdir(parents=True, exist_ok=True)
     n = {"train": 0, "val": 0}
+    sc = proj.stage_cfg("synth"); vrules, sectors = sc.get("validity") or {}, sc.get("sectors") or []
+    skipped = Counter()
     with open(d / "sft_train.jsonl", "w", encoding="utf-8") as tr, open(d / "sft_val.jsonl", "w", encoding="utf-8") as va:
         for dlg in Store(data / "synth", "dialogues").iter():
             m = dlg.get("meta", {})
             if m.get("gold") or (c.get("require_reviewed") and not m.get("reviewed")): continue
+            if c.get("validate", True):
+                ok, why = validity.check(dlg, vrules, sectors)
+                if not ok: skipped[why] += 1; continue
             k = "val" if is_val(dlg["id"], ratio) else "train"
             for ex in _build(dlg, c, system):
                 (va if k == "val" else tr).write(json.dumps(ex, ensure_ascii=False) + "\n"); n[k] += 1
+    n["dialogues_rejected"] = sum(skipped.values()); n["rejected_by"] = dict(skipped)
     return n

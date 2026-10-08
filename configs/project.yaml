@@ -11,7 +11,10 @@ clean:
 
 synth:
   prompt_file: configs/prompts/synth.txt
-  per_issue: 12                  # raise later; only the new ones get generated
+  per_issue: 30                  # raise later; only the new ones get generated
+  attempts: 2                    # tries per dialogue before giving up (each try must pass the validity filter)
+  validity: {min_turns: 4, max_turns: 8, max_turn_chars: 400, agent_no_digits: true, max_english_words: 1, max_repeat_ngram: 2, sector_must_appear: true}
+  sectors: [Kimironko, Remera, Kacyiru, Kimihurura, Gisozi, Kinyinya, Gatsata, Jabana, Ndera, Nduba, Rusororo, Bumbogo, Gikondo, Kagarama, Kanombe, Kicukiro, Masaka, Niboye, Nyarugunga, Gahanga, Gatenga, Nyamirambo, Kimisagara, Muhima, Nyakabanda, Gitega, Mageragere, Rwezamenyo, Kanyinya, Muhoza, Cyuve, Nyamabuye, Kamembe, Nyagatare, Kigabiro, Tumba, Ngoma]
   sleep: 6
   variants:                      # scenario styles, cycled per dialogue
     - "the caller is calm and gives clear details"

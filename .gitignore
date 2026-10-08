@@ -4,3 +4,5 @@ reports/
 __pycache__/
 .env
 .ipynb_checkpoints/
+kaggle_run/secrets.local.json
+kaggle_run/out/

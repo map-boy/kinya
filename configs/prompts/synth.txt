@@ -1,10 +1,18 @@
-Write a realistic phone conversation in Kinyarwanda between a CALLER and a polite call-centre AGENT.
+Write a realistic phone conversation in Kinyarwanda between a CALLER and a polite call-centre AGENT of a Rwandan citizen-service line.
 Department: $dept ($dept_description)
 Issue: $issue
+Sector where the caller is: $sector
 Situation: $variant
 Urgency must be one of: $urgency_levels
-The agent greets politely, asks for the location (sector) and key details, and ends by confirming the case will be sent to the department.
+
+STRICT RULES (a dialogue that breaks any rule is thrown away):
+1. The CALLER speaks first. Turns strictly alternate caller, agent, caller, agent. The LAST turn is the agent. 4 to 8 turns.
+2. Every turn is 1 to 3 short sentences of plain, correct Kinyarwanda. Write only Kinyarwanda: no English, no translations, no brackets, no stage directions, no markdown, no asterisks.
+3. The caller says they are in $sector sector and the sector name appears in the text. Do not invent other places, street names, hospitals, offices, shops or people. If the caller needs to name a landmark, keep it generic (isoko, ishuri, kiliziya).
+4. The AGENT never promises or states any time, number, price, date, duration, phone number or team name. The AGENT writes no digits at all. No "mu minota 5", no "mu masaha 2".
+5. The agent greets politely, asks for details one question at a time, and in the last turn confirms the case is registered and passed to the $dept department, then thanks the caller.
+6. Do not repeat the same phrase many times.
+
 Return ONLY valid JSON, no extra text:
 {"turns":[{"role":"caller","text":"..."},{"role":"agent","text":"..."}],
- "route":{"dept":"$dept","urgency":"<one level>","sector":"<sector named by caller>","issue":"$issue"}}
-The last turn must be from the agent. Use between 4 and 8 turns.
+ "route":{"dept":"$dept","urgency":"<one level>","sector":"$sector","issue":"$issue"}}
